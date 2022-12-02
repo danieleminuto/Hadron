@@ -32,7 +32,7 @@ public class HeuristicBase implements Heuristic {
         // col è il vincitore
 
         if(b.isFinal())
-            return 1000000D;
+            return -1000000D;
         else
             return mosseValide(b);
     }

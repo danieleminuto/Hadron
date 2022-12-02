@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import hadron.board.Board;
 import hadron.heuristic.Heuristic;
 
+@SuppressWarnings("LossyEncoding")
 public class NegaSort implements Research {
 	public Heuristic h;
 	
-	// Lista che contiene i figli per quel turno, serve per poter utilizzare il valore euristico che è
+	// Lista che contiene i figli per quel turno, serve per poter utilizzare il valore euristico che ï¿½
 	// "risalito" dall'itarazione precedente
 	static ArrayList<Node> sons;
 
@@ -59,7 +60,7 @@ public class NegaSort implements Research {
 	 * Implementazione della ricerca NegaScout
 	 * 
 	 * @param currentConfiguration configurazione corrente
-	 * @param d profondità
+	 * @param d profonditï¿½
 	 * @param col colore per cui voglio trovare i figli
 	 * @param alpha valore di alpha
 	 * @param beta valore di beta
