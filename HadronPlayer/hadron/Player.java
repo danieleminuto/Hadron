@@ -4,6 +4,7 @@ import hadron.board.Board;
 import hadron.board.ByteBoard;
 import hadron.heuristic.GenericHeuristic;
 import hadron.heuristic.Heuristic;
+import hadron.heuristic.HeuristicBase;
 import hadron.research.GameController;
 import hadron.research.GameControllerImpl;
 import hadron.research.NegaSort;
@@ -26,7 +27,7 @@ public class Player{
 	}
 	
 	public static void main(String[] args) {
-		Heuristic h = new GenericHeuristic();
+		Heuristic h = new HeuristicBase();
 		Player p1 = new Player(h);	
 		//p1.start(args[0], Integer.parseInt(args[1]));
 		p1.start("localhost",8901);

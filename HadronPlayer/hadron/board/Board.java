@@ -70,7 +70,7 @@ public abstract class Board implements Serializable{
 
 
 	//OCCHIO, ERA PROTECTED
-	public boolean validMove(int i, int j) {
+	protected boolean validMove(int i, int j) {
 		int nPawn = getPawn(i, j);
 
 		if(i<0 || i>=nRows || j<0 || j>=nCols)
