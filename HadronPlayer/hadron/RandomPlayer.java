@@ -26,6 +26,7 @@ public class RandomPlayer {
         new Communication(ip,port,game);
     }
 
+
     public static void main(String[] args) {
         Heuristic h = new RandomHeuristic();
         Player p1 = new Player(h);
