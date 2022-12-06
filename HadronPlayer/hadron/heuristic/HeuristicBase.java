@@ -4,6 +4,7 @@ import hadron.board.Board;
 import hadron.research.Node;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class HeuristicBase implements Heuristic {
     private static final long serialVersionUID = 5783084660998719046L;
@@ -27,43 +28,37 @@ public class HeuristicBase implements Heuristic {
             return -1;
 
         ArrayList<Node> mossePossibili=b.getSons((byte) col);
-        for(Node n:mossePossibili){
-            if(n.getBoard().isFinal())
-                return 1;
-        }
 
-        if(mossePossibili.size()>3){
+        if(mossePossibili.size()>2){
            double min=Double.POSITIVE_INFINITY;
             for(Node n: mossePossibili){
+                if(n.getBoard().isFinal())
+                    return 1;
+
                 ArrayList<Node> nipoti=n.getBoard().getSons((byte) col);
                 if(nipoti.size()<min)
                     min=nipoti.size();
             }
-            return 1-min/100;
+            return 1-min/100+(new Random().nextInt(10)/10000);
         }
 
 
         double min=Double.POSITIVE_INFINITY;
         for(Node n: mossePossibili){
-            ArrayList<Node> nipoti=n.getBoard().getSons((byte) col);
-            if(nipoti.size()==0)
+            if(n.getBoard().isFinal())
                 return 1;
 
-            for(Node nip: nipoti){
-                ArrayList<Node> pronip=nip.getBoard().getSons((byte) col);
-                if(pronip.size()==0)
-                    return -1;
-                for(Node pron: pronip){
-                    ArrayList<Node> pp=pron.getBoard().getSons((byte) col);
-                    if(pp.size()==0)
-                        return 1;
-
-                    if(pp.size()<min)
-                        min=pp.size();
-                }
-            }
+            ArrayList<Node> nipoti=n.getBoard().getSons((byte) col);
+            if(nipoti.size()<min)
+                min=nipoti.size();
         }
-        return 1-min/100;
+        double ret= 1-min/100;
+        if(ret<1.5){
+            return ret-0.0001;
+        }
+        return ret+0.0001;
+
+
 
 
     }
