@@ -29,7 +29,7 @@ public class HeuristicBase implements Heuristic {
 
         ArrayList<Node> mossePossibili=b.getSons((byte) col);
 
-        if(mossePossibili.size()>2){
+        if(mossePossibili.size()>3){
            double min=Double.POSITIVE_INFINITY;
             for(Node n: mossePossibili){
                 if(n.getBoard().isFinal())
@@ -39,7 +39,7 @@ public class HeuristicBase implements Heuristic {
                 if(nipoti.size()<min)
                     min=nipoti.size();
             }
-            return 1-min/100+(new Random().nextInt(10)/10000);
+            return 1-1/min+(new Random().nextInt(10)/10000);
         }
 
 
@@ -52,8 +52,8 @@ public class HeuristicBase implements Heuristic {
             if(nipoti.size()<min)
                 min=nipoti.size();
         }
-        double ret= 1-min/100;
-        if(ret<1.5){
+        double ret= 1-1/min+(new Random().nextInt(10)/10000);
+        if(ret<0.5){
             return ret-0.0001;
         }
         return ret+0.0001;
