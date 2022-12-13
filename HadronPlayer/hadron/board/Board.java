@@ -69,7 +69,7 @@ public abstract class Board implements Serializable{
 	public abstract ArrayList<Node> getSons(byte col);
 
 
-	//OCCHIO, ERA PROTECTED
+
 	protected boolean validMove(int i, int j) {
 		int nPawn = getPawn(i, j);
 
@@ -115,6 +115,7 @@ public abstract class Board implements Serializable{
 
 	
 	public String toString() {
+
 		StringBuilder sb = new StringBuilder(200);
 		sb.append("    1   2   3   4   5   6   7   8   9\n");
 		sb.append("  =====================================\n");
@@ -137,6 +138,7 @@ public abstract class Board implements Serializable{
 		sb.append("    1   2   3   4   5   6   7   8   9\n");
 
 		return sb.toString();
+		//return "";
 	}
 	
 	/**

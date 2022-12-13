@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.LinkedList;
+import java.util.Locale;
 
 import hadron.board.Board;
 import hadron.research.GameController;
@@ -59,6 +60,126 @@ public class MyCommunication {
         }
     }
 
+    public String converti(String move){
+        char l=move.charAt(0);
+        int n=Integer.parseInt(move.charAt(1)+"");
+
+        int le=0;
+        char nu=' ';
+
+        if(l=='a')
+            le=1;
+        else if(l=='b')
+            le=2;
+        else if(l=='c')
+            le=3;
+        else if(l=='d')
+            le=4;
+        else if(l=='e')
+            le=5;
+        else if(l=='f')
+            le=6;
+        else if(l=='g')
+            le=7;
+        else if(l=='h')
+            le=8;
+        else if(l=='i')
+            le=9;
+
+        if(n==1)
+            nu='i';
+        else if(n==2)
+            nu='h';
+        else if(n==3)
+            nu='g';
+        else if(n==4)
+            nu='f';
+        else if(n==5)
+            nu='e';
+        else if(n==6)
+            nu='d';
+        else if(n==7)
+            nu='c';
+        else if(n==8)
+            nu='b';
+        else if(n==9)
+            nu='a';
+
+        return String.valueOf(nu)+le+"";
+    }
+
+    public static String convertiPerLudii(String move){
+
+
+        char l=move.toLowerCase(Locale.ROOT).charAt(0);
+        int n=Integer.parseInt(String.valueOf(move.charAt(1)));
+
+        int nu=0;
+        char le=' ';
+
+        switch (n){
+            case 1:
+                le= 'a';
+                break;
+            case 2:
+                le= 'b';
+                break;
+            case 3:
+                le= 'c';
+                break;
+            case 4:
+                le= 'd';
+                break;
+            case 5:
+                le= 'e';
+                break;
+            case 6:
+                le= 'f';
+                break;
+            case 7:
+                le= 'g';
+                break;
+            case 8:
+                le= 'h';
+                break;
+            case 9:
+                le= 'i';
+                break;
+        }
+
+        switch (l){
+            case 'a':
+                nu= 9;
+                break;
+            case 'b':
+                nu= 8;
+                break;
+            case 'c':
+                nu= 7;
+                break;
+            case 'd':
+                nu= 6;
+                break;
+            case 'e':
+                nu= 5;
+                break;
+            case 'f':
+                nu= 4;
+                break;
+            case 'g':
+                nu= 3;
+                break;
+            case 'h':
+                nu= 2;
+                break;
+            case 'i':
+                nu= 1;
+                break;
+        }
+
+        return String.valueOf(le)+nu+"";
+    }
+
     public Listener getListener() {
         return this.listener;
     }
@@ -66,7 +187,10 @@ public class MyCommunication {
     /**
      * Oggetto che si occupa di leggere e gestire i messaggi del server
      */
+
     class Listener extends Thread{
+
+
 
         public void run() {
             String myMove = null;
@@ -79,15 +203,20 @@ public class MyCommunication {
                     if(message.equals("YOUR_TURN")) {
                         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
                         myMove= br.readLine();
+
+                        //per giocare con la scacchiera di ludii
+                        myMove=converti(myMove);
                         out.println("MOVE "+myMove);
                         out.flush();
 
                         System.out.println(game.getBoard());
                         moves.add(myMove);
                         boards.add( game.getBoard() );
-
                     }else if(message.contains("OPPONENT_MOVE")) {
                         String oppMove = message.substring(14);
+
+                        //per ludii
+                        System.out.println("mossa per ludii "+convertiPerLudii(oppMove));
                         game.updateGame(oppMove);
 
                         moves.add(oppMove);

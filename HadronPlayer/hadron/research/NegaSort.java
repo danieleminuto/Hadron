@@ -103,7 +103,6 @@ public class NegaSort implements Research {
 			
 			n = alpha+1;
 		}
-
 		return best;
 	}
 

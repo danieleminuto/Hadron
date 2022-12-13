@@ -88,7 +88,6 @@ public class Communication {
 					}else if(message.contains("OPPONENT_MOVE")) {
 						String oppMove = message.substring(14);
 						game.updateGame(oppMove);
-
 						moves.add(oppMove);
 						boards.add( game.getBoard() );
 

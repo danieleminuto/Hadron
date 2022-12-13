@@ -18,8 +18,17 @@ public class GenericHeuristic implements Heuristic {
 		// col è il vincitore
 		if(b.isFinal())
 			return -1000000D;
+        /*if(valore>0){
+            valore--;
+            return new Random().nextInt(1000);
+        }*/
 
-		return  0;
+		int size=b.getSons((byte)col).size();
+		if(size%2==0){
+			//return -1000+size;
+			return size-1000;
+		}
+		return 1000-size;
 	}
 
 	
