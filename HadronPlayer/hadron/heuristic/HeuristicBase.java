@@ -191,7 +191,7 @@ public class HeuristicBase implements Heuristic {
         ArrayList<Node> mossePossibili=b.getSons((byte) col);
 
 
-        if(mossePossibili.size()>40) {
+        if(mossePossibili.size()>55) {
             if (mossePossibili.size() % 2 == 0) {
                 return mossePossibili.size() - 1000000D + new Random().nextInt(1000)/10.0;
             }
