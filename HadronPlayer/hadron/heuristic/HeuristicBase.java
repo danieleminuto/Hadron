@@ -76,7 +76,7 @@ public class HeuristicBase implements Heuristic {
                     flag=false;
             }
 
-            //verifica mossa chiusa come ieri
+
             if(flag)
                 mosseChiuse++;
             else{
@@ -89,8 +89,7 @@ public class HeuristicBase implements Heuristic {
         return new int[] {mosseChiuse,aprePari,apreDispari};
     }
 
-    public int[] neutre_pos_neg(ArrayList<Node> mossePossibili,int col){
-        int neutre=0;
+    public int[] pos_neg(ArrayList<Node> mossePossibili,int col){
         int pos=0;
         int neg=0;
         for(Node n:mossePossibili){
@@ -109,7 +108,7 @@ public class HeuristicBase implements Heuristic {
             colonna--;
 
             if(riga==0 && colonna==0 || riga==8 && colonna==8 || colonna==0 && riga==8|| colonna==8 && riga==0){
-                neutre++;
+                neg++;
             }
             else {
                 try {
@@ -170,19 +169,15 @@ public class HeuristicBase implements Heuristic {
                     }
 
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    neutre++;
+                    neg++;
                 }
             }
         }
-        return new int[] {neutre, pos, neg};
+        return new int[] {pos, neg};
     }
 
     @Override
 
-    //mosse possibili-> figli (mosse che posso scegliere io)
-    //nipoti (mosse che può scegliere l'avversario) (deve tendere a 0)
-    //pronipoti (mosse che posso scegliere io) (deve essere diverso da 0)
-    //pronip2 (mosse che può scegliere l'avversario) (deve tendere a 0)
     public double evaluate(Board b, int col) {
 
         if(b.isFinal())
@@ -200,11 +195,10 @@ public class HeuristicBase implements Heuristic {
 
 
         if(mossePossibili.size()>10){
-            int[] ar=neutre_pos_neg(mossePossibili,col);
-            int neutre=ar[0];
-            int pos=ar[1];
-            int neg=ar[2];
-            return 1000000D - (2 * 1000000D * (((neutre+neg)/2) / mossePossibili.size())) - (mossePossibili.size() - pos) * 100000;
+            int[] ar=pos_neg(mossePossibili,col);
+            int pos=ar[0];
+            int neg=ar[1];
+            return 1000000D - (2 * 1000000D * (neg / mossePossibili.size())) - (mossePossibili.size() - pos) * 100000;
         }
 
         int[] ar=chiuse_pari_dispari(mossePossibili,col);

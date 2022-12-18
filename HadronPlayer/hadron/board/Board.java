@@ -115,7 +115,7 @@ public abstract class Board implements Serializable{
 
 	
 	public String toString() {
-/*
+
 		StringBuilder sb = new StringBuilder(200);
 		sb.append("    1   2   3   4   5   6   7   8   9\n");
 		sb.append("  =====================================\n");
@@ -137,8 +137,7 @@ public abstract class Board implements Serializable{
 		sb.append("  =====================================\n");
 		sb.append("    1   2   3   4   5   6   7   8   9\n");
 
-		return sb.toString();*/
-		return "";
+		return sb.toString();
 	}
 	
 	/**

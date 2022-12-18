@@ -29,8 +29,8 @@ public class Player{
 	public static void main(String[] args) {
 		Heuristic h = new HeuristicBase();
 		Player p1 = new Player(h);	
-		//p1.start(args[0], Integer.parseInt(args[1]));
-		p1.start("localhost",8901);
+		p1.start(args[0], Integer.parseInt(args[1]));
+
 	}
 	
 	public GameController getGame() {
